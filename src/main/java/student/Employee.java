@@ -42,7 +42,7 @@ public abstract class Employee implements IEmployee {
     /**
      * The tax rate.
      */
-    private double TAX_RATE = 0.2265;
+    private double taxRate = 0.2265;
 
     /**
      * The pay stub for the employee.
@@ -85,7 +85,7 @@ public abstract class Employee implements IEmployee {
         BigDecimal grossPay = calculateGrossPay(hoursWorked);
 
         netPay = (grossPay.subtract(BigDecimal.valueOf(pretaxDeductions)))
-                .multiply(BigDecimal.valueOf(1).subtract(BigDecimal.valueOf(TAX_RATE)));
+                .multiply(BigDecimal.valueOf(1).subtract(BigDecimal.valueOf(taxRate)));
 
         return netPay;
     }
@@ -99,7 +99,7 @@ public abstract class Employee implements IEmployee {
         BigDecimal taxes;
         BigDecimal grossPay = calculateGrossPay(hoursWorked);
 
-        taxes = (grossPay.subtract(BigDecimal.valueOf(pretaxDeductions))).multiply(BigDecimal.valueOf(TAX_RATE));
+        taxes = (grossPay.subtract(BigDecimal.valueOf(pretaxDeductions))).multiply(BigDecimal.valueOf(taxRate));
 
         return taxes;
     }
