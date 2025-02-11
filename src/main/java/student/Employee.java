@@ -65,14 +65,14 @@ public abstract class Employee implements IEmployee {
      * @param ytdTaxesPaid The year-to-date taxes paid by the employee.
      */
     public Employee(String employeeType, String name, String id, double payRate,
-                    double pretaxDeductions, double ytdEarnings, double ytdTaxesPaid) {
+                    double ytdEarnings, double ytdTaxesPaid, double pretaxDeductions) {
         this.employeeType = employeeType;
         this.name = name;
         this.id = id;
         this.payRate = payRate;
-        this.pretaxDeductions = pretaxDeductions;
         this.ytdEarnings = ytdEarnings;
         this.ytdTaxesPaid = ytdTaxesPaid;
+        this.pretaxDeductions = pretaxDeductions;
     }
 
     /**
