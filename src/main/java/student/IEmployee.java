@@ -8,6 +8,12 @@ package student;
 public interface IEmployee {
 
     /**
+     * Gets the type of the employee.
+     * @return The employee's type.
+     */
+    String getEmployeeType();
+
+    /**
      * Gets the name of the employee.
      * @return The employee's name.
      */
@@ -26,10 +32,10 @@ public interface IEmployee {
     double getPayRate();
 
     /**
-     * Gets the type of the employee.
-     * @return The employee's type.
+     * Gets the pre-tax deductions of the employee.
+     * @return The employee's pre-tax deductions.
      */
-    String getEmployeeType();
+    double getPretaxDeductions();
 
     /**
      * Gets the year-to-date earnings of the employee.
@@ -42,12 +48,6 @@ public interface IEmployee {
      * @return The employee's year-to-date taxes paid.
      */
     double getYTDTaxesPaid();
-
-    /**
-     * Gets the pre-tax deductions of the employee.
-     * @return The employee's pre-tax deductions.
-     */
-    double getPretaxDeductions();
 
     /**
      * Converts the employee's data to a CSV format.

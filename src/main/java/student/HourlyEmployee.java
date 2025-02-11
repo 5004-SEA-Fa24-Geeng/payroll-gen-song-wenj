@@ -17,9 +17,9 @@ public class HourlyEmployee extends Employee {
      * @param ytdEarnings The year-to-date earnings of the employee.
      * @param ytdTaxesPaid The year-to-date taxes paid by the employee.
      */
-    public HourlyEmployee(String name, String id, double payRate, double pretaxDeductions,
-                          double ytdEarnings, double ytdTaxesPaid) {
-        super(name, id, payRate, pretaxDeductions, ytdEarnings, ytdTaxesPaid);
+    public HourlyEmployee(String name, String id, double payRate,
+                          double pretaxDeductions, double ytdEarnings, double ytdTaxesPaid) {
+        super("HOURLY", name, id, payRate, pretaxDeductions, ytdEarnings, ytdTaxesPaid);
     }
 
     /**
@@ -42,14 +42,5 @@ public class HourlyEmployee extends Employee {
         }
 
         return grossPay;
-    }
-
-    /**
-     * Gets the employee type of the hourly employee.
-     * @return A string representing the employee type.
-     */
-    @Override
-    public String getEmployeeType() {
-        return "HOURLY";
     }
 }

@@ -10,6 +10,11 @@ import java.math.BigDecimal;
 public abstract class Employee implements IEmployee {
 
     /**
+     * The type of the employee.
+     */
+    private String employeeType;
+
+    /**
      * The name of the employee.
      */
     private String name;
@@ -51,6 +56,7 @@ public abstract class Employee implements IEmployee {
 
     /**
      * Constructs an Employee instance with the specified details.
+     * @param employeeType The type of the employee.
      * @param name The name of the employee.
      * @param id The ID of the employee.
      * @param payRate The pay rate of the employee.
@@ -58,8 +64,9 @@ public abstract class Employee implements IEmployee {
      * @param ytdEarnings The year-to-date earnings of the employee.
      * @param ytdTaxesPaid The year-to-date taxes paid by the employee.
      */
-    public Employee(String name, String id, double payRate, double pretaxDeductions,
-                    double ytdEarnings, double ytdTaxesPaid) {
+    public Employee(String employeeType, String name, String id, double payRate,
+                    double pretaxDeductions, double ytdEarnings, double ytdTaxesPaid) {
+        this.employeeType = employeeType;
         this.name = name;
         this.id = id;
         this.payRate = payRate;
@@ -131,6 +138,15 @@ public abstract class Employee implements IEmployee {
     }
 
     /**
+     * Gets the type of the employee.
+     * @return The employee's type.
+     */
+    @Override
+    public String getEmployeeType() {
+        return employeeType;
+    }
+
+    /**
      * Gets the name of the employee.
      * @return The employee's name.
      */
@@ -158,6 +174,15 @@ public abstract class Employee implements IEmployee {
     }
 
     /**
+     * Gets the pre-tax deductions of the employee.
+     * @return The employee's pre-tax deductions.
+     */
+    @Override
+    public double getPretaxDeductions() {
+        return pretaxDeductions;
+    }
+
+    /**
      * Gets the year-to-date earnings of the employee.
      * @return The employee's year-to-date earnings.
      */
@@ -176,14 +201,6 @@ public abstract class Employee implements IEmployee {
 
     /**
      * Sets the year-to-date taxes paid by the employee.
-     * @param ytdTaxesPaid The employee's year-to-date taxes paid.
-     */
-    public void setYTDTaxesPaid(double ytdTaxesPaid) {
-        this.ytdTaxesPaid = ytdTaxesPaid;
-    }
-
-    /**
-     * Sets the year-to-date taxes paid by the employee.
      * @return The year-to-date taxes paid to set.
      */
     @Override
@@ -192,12 +209,11 @@ public abstract class Employee implements IEmployee {
     }
 
     /**
-     * Gets the pre-tax deductions of the employee.
-     * @return The employee's pre-tax deductions.
+     * Sets the year-to-date taxes paid by the employee.
+     * @param ytdTaxesPaid The employee's year-to-date taxes paid.
      */
-    @Override
-    public double getPretaxDeductions() {
-        return pretaxDeductions;
+    public void setYTDTaxesPaid(double ytdTaxesPaid) {
+        this.ytdTaxesPaid = ytdTaxesPaid;
     }
 
     /**

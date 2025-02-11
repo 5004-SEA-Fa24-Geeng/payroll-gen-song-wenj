@@ -20,7 +20,7 @@ public class SalaryEmployee extends Employee {
      */
     public SalaryEmployee(String name, String id, double payRate, double pretaxDeductions,
                           double ytdEarnings, double ytdTaxesPaid) {
-        super(name, id, payRate, pretaxDeductions, ytdEarnings, ytdTaxesPaid);
+        super("SALARY", name, id, payRate, pretaxDeductions, ytdEarnings, ytdTaxesPaid);
     }
 
     /**
