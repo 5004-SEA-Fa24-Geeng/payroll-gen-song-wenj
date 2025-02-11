@@ -30,11 +30,6 @@ public abstract class Employee implements IEmployee {
     private double payRate;
 
     /**
-     * The pre-tax dedections of the employee.
-     */
-    private double pretaxDeductions;
-
-    /**
      * The year-to-date earnings of the employee.
      */
     private double ytdEarnings;
@@ -43,6 +38,11 @@ public abstract class Employee implements IEmployee {
      * The year-to-date taxes paid of the employee.
      */
     private double ytdTaxesPaid;
+
+    /**
+     * The pre-tax dedections of the employee.
+     */
+    private double pretaxDeductions;
 
     /**
      * The tax rate.

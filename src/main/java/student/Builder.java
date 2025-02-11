@@ -33,9 +33,9 @@ public final class Builder {
         IEmployee employee = null;
 
         if (employeeType.equals("HOURLY")) {
-            employee = new HourlyEmployee(name, id, payRate, pretaxDeductions, ytdEarnings, ytdTaxesPaid);
+            employee = new HourlyEmployee(name, id, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
         } else if (employeeType.equals("SALARY")) {
-            employee = new SalaryEmployee(name, id, payRate, pretaxDeductions, ytdEarnings, ytdTaxesPaid);
+            employee = new SalaryEmployee(name, id, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
         } else {
             throw new IllegalArgumentException("Invalid employee type: " + employeeType);
         }
