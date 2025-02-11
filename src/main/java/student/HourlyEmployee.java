@@ -14,11 +14,12 @@ public class HourlyEmployee extends Employee {
      * @param id The ID of the employee.
      * @param payRate The hourly pay rate of the employee.
      * @param pretaxDeductions The pre-tax deductions of the employee.
-     * @param YTDEarnings The year-to-date earnings of the employee.
-     * @param YTDTaxesPaid The year-to-date taxes paid by the employee.
+     * @param ytdEarnings The year-to-date earnings of the employee.
+     * @param ytdTaxesPaid The year-to-date taxes paid by the employee.
      */
-    public HourlyEmployee(String name, String id, double payRate, double pretaxDeductions, double YTDEarnings, double YTDTaxesPaid) {
-        super(name, id, payRate, pretaxDeductions, YTDEarnings, YTDTaxesPaid);
+    public HourlyEmployee(String name, String id, double payRate, double pretaxDeductions,
+                          double ytdEarnings, double ytdTaxesPaid) {
+        super(name, id, payRate, pretaxDeductions, ytdEarnings, ytdTaxesPaid);
     }
 
     /**
@@ -35,7 +36,8 @@ public class HourlyEmployee extends Employee {
             grossPay = hourlyRate.multiply(BigDecimal.valueOf(hoursWorked));
         } else {
             BigDecimal normalPay = hourlyRate.multiply(BigDecimal.valueOf(40));
-            BigDecimal overtimePay = hourlyRate.multiply(BigDecimal.valueOf(hoursWorked).subtract(BigDecimal.valueOf(40))).multiply(BigDecimal.valueOf(1.5));
+            BigDecimal overtimePay = hourlyRate.multiply(BigDecimal.valueOf(hoursWorked)
+                    .subtract(BigDecimal.valueOf(40))).multiply(BigDecimal.valueOf(1.5));
             grossPay = normalPay.add(overtimePay);
         }
 

@@ -60,7 +60,8 @@ public final class PayrollGenerator {
      * @param timeCardList List of time cards to use for updates.
      * @param employeeFile The file path to write the updated employee records to.
      */
-    private static void updateEmployeeRecords(List<IEmployee> employees, List<ITimeCard> timeCardList, String employeeFile) {
+    private static void updateEmployeeRecords(List<IEmployee> employees, List<ITimeCard> timeCardList,
+                                              String employeeFile) {
         for (IEmployee employee : employees) {
             Optional<ITimeCard> matchingTimeCard = timeCardList.stream()
                     .filter(tc -> tc.getEmployeeID().equals(employee.getID()))
@@ -116,7 +117,8 @@ public final class PayrollGenerator {
         }
 
         try {
-            Files.write(Paths.get(payrollFile), payStubLines, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            Files.write(Paths.get(payrollFile), payStubLines,
+                    StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (Exception e) {
             System.err.println("Error writing pay stub records to file: " + e.getMessage());
         }

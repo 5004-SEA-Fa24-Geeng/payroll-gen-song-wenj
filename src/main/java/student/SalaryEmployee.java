@@ -15,11 +15,12 @@ public class SalaryEmployee extends Employee {
      * @param id The ID of the employee.
      * @param payRate The annual salary of the employee.
      * @param pretaxDeductions The pre-tax deductions of the employee.
-     * @param YTDEarnings The year-to-date earnings of the employee.
-     * @param YTDTaxesPaid The year-to-date taxes paid by the employee.
+     * @param ytdEarnings The year-to-date earnings of the employee.
+     * @param ytdTaxesPaid The year-to-date taxes paid by the employee.
      */
-    public SalaryEmployee(String name, String id, double payRate, double pretaxDeductions, double YTDEarnings, double YTDTaxesPaid) {
-        super(name, id, payRate, pretaxDeductions, YTDEarnings, YTDTaxesPaid);
+    public SalaryEmployee(String name, String id, double payRate, double pretaxDeductions,
+                          double ytdEarnings, double ytdTaxesPaid) {
+        super(name, id, payRate, pretaxDeductions, ytdEarnings, ytdTaxesPaid);
     }
 
     /**

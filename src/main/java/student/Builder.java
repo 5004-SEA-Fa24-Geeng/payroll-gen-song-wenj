@@ -27,15 +27,15 @@ public final class Builder {
         String id = employeeFields[2].trim();
         double payRate = Double.parseDouble(employeeFields[3].trim());
         double pretaxDeductions = Double.parseDouble(employeeFields[4].trim());
-        double YTDEarnings = Double.parseDouble(employeeFields[5].trim());
-        double YTDTaxesPaid = Double.parseDouble(employeeFields[6].trim());
+        double ytdEarnings = Double.parseDouble(employeeFields[5].trim());
+        double ytdTaxesPaid = Double.parseDouble(employeeFields[6].trim());
 
         IEmployee employee = null;
 
         if (employeeType.equals("HOURLY")) {
-            employee = new HourlyEmployee(name, id, payRate, pretaxDeductions, YTDEarnings, YTDTaxesPaid);
+            employee = new HourlyEmployee(name, id, payRate, pretaxDeductions, ytdEarnings, ytdTaxesPaid);
         } else if (employeeType.equals("SALARY")) {
-            employee = new SalaryEmployee(name, id, payRate, pretaxDeductions, YTDEarnings, YTDTaxesPaid);
+            employee = new SalaryEmployee(name, id, payRate, pretaxDeductions, ytdEarnings, ytdTaxesPaid);
         } else {
             throw new IllegalArgumentException("Invalid employee type: " + employeeType);
         }

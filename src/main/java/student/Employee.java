@@ -22,7 +22,7 @@ public abstract class Employee implements IEmployee {
     /**
      * The pay rate of the employee.
      */
-    protected double payRate;
+    private double payRate;
 
     /**
      * The pre-tax dedections of the employee.
@@ -32,12 +32,12 @@ public abstract class Employee implements IEmployee {
     /**
      * The year-to-date earnings of the employee.
      */
-    private double YTDEarnings;
+    private double ytdEarnings;
 
     /**
      * The year-to-date taxes paid of the employee.
      */
-    private double YTDTaxesPaid;
+    private double ytdTaxesPaid;
 
     /**
      * The tax rate.
@@ -55,16 +55,17 @@ public abstract class Employee implements IEmployee {
      * @param id The ID of the employee.
      * @param payRate The pay rate of the employee.
      * @param pretaxDeductions The pre-tax deductions of the employee.
-     * @param YTDEarnings The year-to-date earnings of the employee.
-     * @param YTDTaxesPaid The year-to-date taxes paid by the employee.
+     * @param ytdEarnings The year-to-date earnings of the employee.
+     * @param ytdTaxesPaid The year-to-date taxes paid by the employee.
      */
-    public Employee(String name, String id, double payRate, double pretaxDeductions, double YTDEarnings, double YTDTaxesPaid) {
+    public Employee(String name, String id, double payRate, double pretaxDeductions,
+                    double ytdEarnings, double ytdTaxesPaid) {
         this.name = name;
         this.id = id;
         this.payRate = payRate;
         this.pretaxDeductions = pretaxDeductions;
-        this.YTDEarnings = YTDEarnings;
-        this.YTDTaxesPaid = YTDTaxesPaid;
+        this.ytdEarnings = ytdEarnings;
+        this.ytdTaxesPaid = ytdTaxesPaid;
     }
 
     /**
@@ -83,7 +84,8 @@ public abstract class Employee implements IEmployee {
         BigDecimal netPay;
         BigDecimal grossPay = calculateGrossPay(hoursWorked);
 
-        netPay = (grossPay.subtract(BigDecimal.valueOf(pretaxDeductions))).multiply(BigDecimal.valueOf(1).subtract(BigDecimal.valueOf(TAX_RATE)));
+        netPay = (grossPay.subtract(BigDecimal.valueOf(pretaxDeductions)))
+                .multiply(BigDecimal.valueOf(1).subtract(BigDecimal.valueOf(TAX_RATE)));
 
         return netPay;
     }
@@ -110,7 +112,7 @@ public abstract class Employee implements IEmployee {
     public BigDecimal calculateYTDEarnings(double hoursWorked) {
         BigDecimal netPay = calculateNetPay(hoursWorked);
 
-        BigDecimal ytdEarnings = BigDecimal.valueOf(YTDEarnings).add(netPay);
+        BigDecimal ytdEarnings = BigDecimal.valueOf(this.ytdEarnings).add(netPay);
 
         return ytdEarnings;
     }
@@ -123,7 +125,7 @@ public abstract class Employee implements IEmployee {
     public BigDecimal calculateYTDTaxesPaid(double hoursWorked) {
         BigDecimal taxes = calculateTaxes(hoursWorked);
 
-        BigDecimal ytdTaxesPaid = BigDecimal.valueOf(YTDTaxesPaid).add(taxes);
+        BigDecimal ytdTaxesPaid = BigDecimal.valueOf(this.ytdTaxesPaid).add(taxes);
 
         return ytdTaxesPaid;
     }
@@ -161,23 +163,23 @@ public abstract class Employee implements IEmployee {
      */
     @Override
     public double getYTDEarnings() {
-        return YTDEarnings;
+        return ytdEarnings;
     }
 
     /**
-     * Sets the year-to-date earnings of the employee.
-     * @return The year-to-date earnings to set.
+     * Sets the year-to-date earnings by the employee.
+     * @param ytdEarnings The employee's year-to-date earnings.
      */
-    public void setYTDEarnings(double YTDEarnings) {
-        this.YTDEarnings = YTDEarnings;
+    public void setYTDEarnings(double ytdEarnings) {
+        this.ytdEarnings = ytdEarnings;
     }
 
     /**
-     * Gets the year-to-date taxes paid by the employee.
-     * @return The employee's year-to-date taxes paid.
+     * Sets the year-to-date taxes paid by the employee.
+     * @param ytdTaxesPaid The employee's year-to-date taxes paid.
      */
-    public void setYTDTaxesPaid(double YTDTaxesPaid) {
-        this.YTDTaxesPaid = YTDTaxesPaid;
+    public void setYTDTaxesPaid(double ytdTaxesPaid) {
+        this.ytdTaxesPaid = ytdTaxesPaid;
     }
 
     /**
@@ -186,7 +188,7 @@ public abstract class Employee implements IEmployee {
      */
     @Override
     public double getYTDTaxesPaid() {
-        return YTDTaxesPaid;
+        return ytdTaxesPaid;
     }
 
     /**
@@ -219,7 +221,8 @@ public abstract class Employee implements IEmployee {
         setYTDEarnings(updatedYTDEarnings.doubleValue());
         setYTDTaxesPaid(updatedYTDTaxesPaid.doubleValue());
 
-        this.payStub = new PayStub(this, netPay.doubleValue(), taxes.doubleValue(), updatedYTDEarnings.doubleValue(), updatedYTDTaxesPaid.doubleValue());
+        this.payStub = new PayStub(this, netPay.doubleValue(), taxes.doubleValue(),
+                updatedYTDEarnings.doubleValue(), updatedYTDTaxesPaid.doubleValue());
     }
 
     /**
