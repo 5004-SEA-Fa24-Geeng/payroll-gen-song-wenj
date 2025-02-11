@@ -67,6 +67,10 @@ public final class PayrollGenerator {
             if (matchingTimeCard.isPresent()) {
                 double hoursWorked = matchingTimeCard.get().getHoursWorked();
 
+                if (hoursWorked < 0) {
+                    continue;
+                }
+
                 Employee emp = (Employee) employee;
 
                 emp.processPayroll(hoursWorked);
