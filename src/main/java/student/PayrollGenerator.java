@@ -36,18 +36,27 @@ public final class PayrollGenerator {
      * @param args Command-line arguments for specifying file paths.
      */
     public static void main(String[] args) {
+        // Process the command-line arguments and store them in an Arguments object
         Arguments arguments = Arguments.process(args);
 
+        // Read the employee data from the specified file and store it in a list of strings
         List<String> employeeLines = FileUtil.readFileToList(arguments.getEmployeeFile());
+
+        // Read the time card data from the specified file and store it in a list of strings
         List<String> timeCards = FileUtil.readFileToList(arguments.getTimeCards());
 
+        // Convert the list of employee CSV strings to a list of IEmployee objects using the Builder class
         List<IEmployee> employees = employeeLines.stream().map(Builder::buildEmployeeFromCSV)
                 .collect(Collectors.toList());
+
+        // Convert the list of time card CSV strings to a list of ITimeCard objects using the Builder class
         List<ITimeCard> timeCardList = timeCards.stream().map(Builder::buildTimeCardFromCSV)
                 .collect(Collectors.toList());
 
+        // Update the employee records based on the time cards and write the updated records back to the employee file
         updateEmployeeRecords(employees, timeCardList, arguments.getEmployeeFile());
 
+        // Generate pay stubs for the employees and write them to the specified payroll file
         generatePayStubs(employees, arguments.getPayrollFile());
     }
 
@@ -60,22 +69,29 @@ public final class PayrollGenerator {
     private static void updateEmployeeRecords(List<IEmployee> employees, List<ITimeCard> timeCardList,
                                               String employeeFile) {
         for (IEmployee employee : employees) {
+            // Find the first time card that matches the current employee's ID
             Optional<ITimeCard> matchingTimeCard = timeCardList.stream()
                     .filter(tc -> tc.getEmployeeID().equals(employee.getID()))
                     .findFirst();
 
+            // If a matching time card is found
             if (matchingTimeCard.isPresent()) {
+                // Get the hours worked from the matching time card
                 double hoursWorked = matchingTimeCard.get().getHoursWorked();
 
+                // If the hours worked are negative, skip this iteration and move to the next employee
                 if (hoursWorked < 0) {
                     continue;
                 }
 
+                // Cast the IEmployee interface to the Employee class
                 Employee emp = (Employee) employee;
 
+                // Process the payroll for the employee based on the hours worked
                 emp.processPayroll(hoursWorked);
             }
 
+            // Write the updated employee records to a file
             writeUpdatedEmployeesToFile(employees, employeeFile);
         }
     }
@@ -86,12 +102,15 @@ public final class PayrollGenerator {
      * @param employeeFile The file path to write the updated employee records to.
      */
     private static void writeUpdatedEmployeesToFile(List<IEmployee> employees, String employeeFile) {
+        // Convert each employee to a CSV formatted string using the toCSV method and collect them into a list
         List<String> updatedEmployeeLines = employees.stream()
                 .map(IEmployee::toCSV)
                 .collect(Collectors.toList());
 
+        // Add the CSV header line at the beginning of the list
         updatedEmployeeLines.add(0, FileUtil.EMPLOYEE_HEADER);
 
+        // Try to write the list of CSV lines to the specified file
         try {
             FileUtil.writeFile(employeeFile, updatedEmployeeLines);
         } catch (Exception e) {
@@ -105,18 +124,24 @@ public final class PayrollGenerator {
      * @param payrollFile The file path to write the generated pay stub records to.
      */
     private static void generatePayStubs(List<IEmployee> employees, String payrollFile) {
+        // Create a list to store the CSV lines for the pay stubs
         List<String> payStubLines = new ArrayList<>();
 
+        // Add the CSV header line for the pay stubs
         payStubLines.add(FileUtil.PAY_STUB_HEADER);
 
         for (IEmployee employee : employees) {
+            // Cast the IEmployee interface to the Employee class to call the getPayStub method
             Employee emp = (Employee) employee;
             PayStub payStub = emp.getPayStub();
+
+            // If the pay stub is not null, add it to the list of pay stub lines in CSV format
             if (payStub != null) {
                 payStubLines.add(payStub.toCSV());
             }
         }
 
+        // Try to write the list of pay stub lines to the specified file
         try {
             FileUtil.writeFile(payrollFile, payStubLines);
         } catch (Exception e) {
