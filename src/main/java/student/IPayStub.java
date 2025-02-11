@@ -1,34 +1,44 @@
 package student;
 
 /**
- * An interface for the concept of the pay stub.
- * 
- * DO NOT MODIFY THIS FILE! (unless you are cleaning up comments/style changes)
- * 
+ * The IPayStub interface defines the methods that must be implemented by any class representing a pay stub.
+ * This interface includes methods for retrieving pay stub details and converting pay stub data to a CSV format.
  */
 public interface IPayStub {
 
     /**
-     * Gets the pay for the current pay period.
-     * 
-     * @return the pay for the current pay period
+     * Gets the name of the employee associated with the pay stub.
+     * @return The employee's name.
      */
-    double getPay();
+    String getEmployeeName();
 
     /**
-     * Gets the taxes paid for the current pay period.
-     * 
-     * @return the taxes paid for the current pay period
+     * Gets the net pay of the employee.
+     * @return The employee's net pay.
      */
-    double getTaxesPaid();
+    double getNetPay();
 
     /**
-     * Converts the PayStub object to a CSV string.
-     * 
-     * Format of the CSV string is: "employee_name,net_pay,taxes,ytd_earnings,ytd_taxes_paid"
-     * 
-     * @return the CSV string
+     * Gets the taxes paid by the employee.
+     * @return The taxes paid by the employee.
+     */
+    double getTaxes();
+
+    /**
+     * Gets the year-to-date earnings of the employee.
+     * @return The employee's year-to-date earnings.
+     */
+    double getYtdEarnings();
+
+    /**
+     * Gets the year-to-date taxes paid by the employee.
+     * @return The employee's year-to-date taxes paid.
+     */
+    double getYtdTaxesPaid();
+
+    /**
+     * Converts the pay stub data to a CSV format.
+     * @return A string representing the pay stub data in CSV format.
      */
     String toCSV();
-
 }
