@@ -92,7 +92,7 @@ public final class PayrollGenerator {
         updatedEmployeeLines.add(0, FileUtil.EMPLOYEE_HEADER);
 
         try {
-            Files.write(Paths.get(employeeFile), updatedEmployeeLines, StandardOpenOption.TRUNCATE_EXISTING);
+            FileUtil.writeFile(employeeFile, updatedEmployeeLines);
         } catch (Exception e) {
             System.err.println("Error writing update employee records to file: " + e.getMessage());
         }
@@ -117,8 +117,7 @@ public final class PayrollGenerator {
         }
 
         try {
-            Files.write(Paths.get(payrollFile), payStubLines,
-                    StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            FileUtil.writeFile(payrollFile, payStubLines);
         } catch (Exception e) {
             System.err.println("Error writing pay stub records to file: " + e.getMessage());
         }
